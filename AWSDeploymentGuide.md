@@ -1,16 +1,13 @@
-# Make a new folder
+### Make a new folder
+```sh
 mkdir <folder_name>
 ```
-
+### Git clone your repo
 ```sh
-# Git clone your repo
-
 git clone <your_repository_url>
 ```
-
+### Create an ecosystem.config.js file with the following format
 ```js
-// Create an ecosystem.config.js file with the following format
-
 module.exports = {
     apps: [
       {
@@ -31,35 +28,33 @@ module.exports = {
 };
 ```
 
+### Install PM2 globally
 ```sh
-# Install PM2 globally
 sudo npm install -g pm2
 ```
 
+### Start your server with PM2
 ```sh
-# Start your server with PM2
 pm2 start ecosystem.config.js
 ```
 
-```sh
-# Create an A record in the DNS and set the value to the server's IP address
+### Create an A record in the DNS and set the value to the server's IP address
 
-# Install Nginx
+### Install Nginx
+```sh
 sudo apt install nginx -y
 ```
 
+### Navigate to Nginx sites-available directory
 ```sh
-# Navigate to Nginx sites-available directory
 cd /etc/nginx/sites-available
 ```
-
+### Create and edit the configuration file for your domain
 ```sh
-# Create and edit the configuration file for your domain
 nano <your_domain>
 ```
 
-**Paste the following content in the file:**
-
+### Paste the following content in the file:
 ```nginx
 server {
     listen 80;
@@ -75,37 +70,30 @@ server {
     }
 }
 ```
-
+### Set necessary permissions for the configuration file
 ```sh
-# Set necessary permissions for the configuration file
 sudo chmod 644 /etc/nginx/sites-available/<your_domain>
 ```
-
+### Create a symbolic link to enable the configuration
 ```sh
-# Create a symbolic link to enable the configuration
 sudo ln -s /etc/nginx/sites-available/<your_domain> /etc/nginx/sites-enabled/
 ```
-
+### Test Nginx configuration
 ```sh
-# Test Nginx configuration
 sudo nginx -t
 ```
-
+### Verify symbolic link
 ```sh
-# Verify symbolic link
 ls -l /etc/nginx/sites-enabled/
 ```
-
+### Restart Nginx
 ```sh
-# Restart Nginx
 sudo systemctl restart nginx
 ```
-
+### Obtain SSL certificate using Certbot (ensure Certbot is installed)
 ```sh
-# Obtain SSL certificate using Certbot (ensure Certbot is installed)
 sudo apt install certbot python3-certbot-nginx -y
 ```
-
+### Run Certbot to configure SSL
 ```sh
-# Run Certbot to configure SSL
 sudo certbot --nginx -d <your_domain>
